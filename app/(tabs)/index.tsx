@@ -34,6 +34,7 @@ import Avatar from '@/components/Avatar';
 import RideCard from '@/components/RideCard';
 import EmptyState from '@/components/EmptyState';
 import WelcomeScreen from '@/app/welcome';
+import StyledText from '@/components/StyledText';
 
 const { width } = Dimensions.get('window');
 
@@ -216,39 +217,42 @@ export default function HomeScreen() {
         )}
         scrollEventThrottle={16}
       >
-        {/* Main action buttons */}
+        {/* Action Cards */}
         <View style={styles.actionCardsContainer}>
-          <TouchableOpacity 
-            style={[styles.actionCard, styles.findPoolCard]}
-            onPress={() => router.push('/find-pool')}
-          >
-            <View style={styles.actionCardContent}>
-              <View style={styles.actionIconContainer}>
-                <Search size={24} color="#FFFFFF" />
+          <Text style={styles.sectionTitle}>Quick Actions</Text>
+          <View style={styles.actionCardsWrapper}>
+            <TouchableOpacity 
+              style={styles.actionCard}
+              onPress={() => router.push("/(tabs)/find-pool")}
+            >
+              <View style={[styles.actionCardIconContainer, { backgroundColor: '#E8F5E9' }]}>
+                <Users size={24} color="#4CAF50" />
               </View>
-              <Text style={styles.actionCardTitle}>Find Pool</Text>
-              <Text style={styles.actionCardSubtitle}>Find a ride to your destination</Text>
-            </View>
-            <View style={styles.actionCardArrow}>
-              <ChevronRight size={20} color="#FFFFFF" strokeWidth={3} />
-            </View>
-          </TouchableOpacity>
-          
-          <TouchableOpacity 
-            style={[styles.actionCard, styles.offerRideCard]}
-            onPress={() => router.push('/offer-ride')}
-          >
-            <View style={styles.actionCardContent}>
-              <View style={[styles.actionIconContainer, styles.offerRideIcon]}>
-                <Car size={24} color="#FFFFFF" />
+              <View style={styles.actionCardContent}>
+                <Text style={styles.actionCardTitle}>Find Pool</Text>
+                <Text style={styles.actionCardSubtitle}>Save costs, reduce emissions</Text>
               </View>
-              <Text style={styles.actionCardTitle}>Offer Ride</Text>
-              <Text style={styles.actionCardSubtitle}>Share your ride with others</Text>
-            </View>
-            <View style={styles.actionCardArrow}>
-              <ChevronRight size={20} color="#FFFFFF" strokeWidth={3} />
-            </View>
-          </TouchableOpacity>
+              <View style={styles.actionCardArrow}>
+                <ChevronRight size={16} color="#4CAF50" />
+              </View>
+            </TouchableOpacity>
+            
+            <TouchableOpacity 
+              style={styles.actionCard}
+              onPress={() => router.push("/(tabs)/offer-ride")}
+            >
+              <View style={[styles.actionCardIconContainer, { backgroundColor: '#E3F2FD' }]}>
+                <Car size={24} color="#3D68F5" />
+              </View>
+              <View style={styles.actionCardContent}>
+                <Text style={styles.actionCardTitle}>Offer Ride</Text>
+                <Text style={styles.actionCardSubtitle}>Share your journey, earn rewards</Text>
+              </View>
+              <View style={styles.actionCardArrow}>
+                <ChevronRight size={16} color="#3D68F5" />
+              </View>
+            </TouchableOpacity>
+          </View>
         </View>
         
         {/* Upcoming Rides Section */}
@@ -399,8 +403,29 @@ export default function HomeScreen() {
           </View>
         </View>
         
-        {/* Bottom spacing */}
-        <View style={styles.bottomPadding} />
+        {/* Footer - Same as Login Page */}
+        <View style={styles.footer}>
+          <View style={styles.footerContent}>
+            <StyledText weight="semiBold" style={styles.taglineHeading}>Go Further Together!</StyledText>
+            <View style={styles.craftedContainer}>
+              <StyledText weight="regular" style={styles.craftedText}>
+                Crafted with
+              </StyledText>
+              <View style={styles.heartContainer}>
+                <Image 
+                  source={require('@/assets/images/heart-shape.png')}
+                  style={styles.heartImage}
+                />
+              </View>
+              <StyledText weight="regular" style={styles.craftedText}>
+                in Greater Noida, India
+              </StyledText>
+            </View>
+          </View>
+        </View>
+        
+        {/* Small spacing just for tab bar clearance */}
+        <View style={{ height: 20 }} />
       </Animated.ScrollView>
     </View>
   );
@@ -533,59 +558,50 @@ const styles = StyleSheet.create({
   actionCardsContainer: {
     marginBottom: 24,
   },
+  actionCardsWrapper: {
+    marginTop: 12,
+    gap: 12,
+  },
   actionCard: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    backgroundColor: '#FFFFFF',
     borderRadius: 16,
     padding: 16,
-    marginBottom: 12,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
+    shadowOpacity: 0.05,
+    shadowRadius: 5,
     elevation: 3,
   },
-  findPoolCard: {
-    backgroundColor: '#4285F4',
-  },
-  offerRideCard: {
-    backgroundColor: '#4CAF50',
+  actionCardIconContainer: {
+    width: 48,
+    height: 48,
+    borderRadius: 14,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   actionCardContent: {
     flex: 1,
-  },
-  actionIconContainer: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 12,
-  },
-  offerRideIcon: {
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    marginLeft: 16,
   },
   actionCardTitle: {
-    fontSize: 18,
-    fontWeight: '700',
-    color: 'white',
-    marginBottom: 6,
-    fontFamily: fonts.bold,
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#333333',
+    fontFamily: fonts.semiBold,
+    marginBottom: 4,
   },
   actionCardSubtitle: {
-    fontSize: 14,
-    color: 'rgba(255, 255, 255, 0.9)',
+    fontSize: 13,
+    color: '#666666',
     fontFamily: fonts.regular,
   },
   actionCardArrow: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    alignItems: 'center',
+    width: 24,
+    height: 24,
     justifyContent: 'center',
+    alignItems: 'center',
   },
   sectionContainer: {
     marginBottom: 24,
@@ -725,7 +741,40 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     fontFamily: fonts.regular,
   },
-  bottomPadding: {
-    height: 80,
+  footer: {
+    paddingHorizontal: 24,
+    marginTop: 80,
+  },
+  footerContent: {
+    alignItems: 'flex-start',
+  },
+  taglineHeading: {
+    fontSize: 50,
+    color: '#777777',
+    marginBottom: 10,
+    lineHeight: 52,
+    fontFamily: 'System',
+    fontWeight: '600',
+    letterSpacing: -1,
+    opacity: 0.4,
+  },
+  craftedContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  craftedText: {
+    fontSize: 16,
+    color: '#777777',
+    opacity: 0.8,
+  },
+  heartContainer: {
+    paddingHorizontal: 4,
+    justifyContent: 'center',
+  },
+  heartImage: {
+    width: 16,
+    height: 16,
+    tintColor: '#000000',
+    opacity: 0.8,
   },
 });

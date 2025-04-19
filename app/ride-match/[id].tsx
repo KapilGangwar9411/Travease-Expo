@@ -295,7 +295,7 @@ export default function RideMatchDetailScreen() {
         {/* Map Preview */}
         <Card variant="elevated" style={styles.mapCard}>
           <Image
-            source={{ uri: 'https://images.unsplash.com/photo-1569336415962-a4bd9f69c07a' }}
+            source={{ uri: 'https://images.pexels.com/photos/2261678/pexels-photo-2261678.jpeg'}}
             style={styles.mapImage}
           />
           <LinearGradient

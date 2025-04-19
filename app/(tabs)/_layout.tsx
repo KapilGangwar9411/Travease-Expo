@@ -1,5 +1,6 @@
 import React from "react";
 import { Tabs } from "expo-router";
+import { Platform } from "react-native";
 import { 
   Home, 
   Search, 
@@ -20,15 +21,18 @@ export default function TabLayout() {
         tabBarInactiveTintColor: colors.textSecondary,
         tabBarStyle: {
           borderTopColor: colors.border,
-          height: 60,
-          paddingBottom: 8,
+          height: Platform.OS === 'ios' ? 90 : 60,
+          paddingBottom: Platform.OS === 'ios' ? 28 : 8,
           paddingTop: 8,
           display: isAuthenticated ? 'flex' : 'none',
         },
         tabBarLabelStyle: {
           fontSize: 12,
           fontWeight: '500',
+          marginTop: Platform.OS === 'ios' ? -6 : 0,
         },
+        tabBarShowLabel: true,
+        tabBarLabelPosition: 'below-icon',
         headerStyle: {
           backgroundColor: colors.background,
         },
@@ -43,6 +47,7 @@ export default function TabLayout() {
         options={{
           title: "Home",
           tabBarIcon: ({ color }) => <Home size={22} color={color} />,
+          tabBarLabel: "Home",
         }}
       />
       <Tabs.Screen
@@ -50,6 +55,7 @@ export default function TabLayout() {
         options={{
           title: "Find Pool",
           tabBarIcon: ({ color }) => <Search size={22} color={color} />,
+          tabBarLabel: "Find Pool",
         }}
       />
       <Tabs.Screen
@@ -57,6 +63,7 @@ export default function TabLayout() {
         options={{
           title: "Offer Ride",
           tabBarIcon: ({ color }) => <Plus size={22} color={color} />,
+          tabBarLabel: "Offer Ride",
         }}
       />
       <Tabs.Screen
@@ -64,6 +71,7 @@ export default function TabLayout() {
         options={{
           title: "Notifications",
           tabBarIcon: ({ color }) => <Bell size={22} color={color} />,
+          tabBarLabel: "Notifications",
         }}
       />
       <Tabs.Screen
@@ -71,6 +79,7 @@ export default function TabLayout() {
         options={{
           title: "Profile",
           tabBarIcon: ({ color }) => <User size={22} color={color} />,
+          tabBarLabel: "Profile",
         }}
       />
     </Tabs>
